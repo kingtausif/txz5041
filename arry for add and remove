@@ -1,0 +1,109 @@
+                AREA Program, CODE, READONLY
+
+                ENTRY
+
+Main
+
+                LDR        R0,=Data1
+
+                EOR        R1,R1,R1
+
+                EOR        R5,R5,R5
+
+                LDR        R2,Length
+
+                CMP      R2,#0
+
+                BEQ        L1
+
+Loop:
+
+                LDR        R3,[R0]
+
+                CMP      R3,R1
+
+                BCC        L2
+
+                MOV     R4,R1
+
+                MOV     R1,R3
+
+L2:
+
+                ADD       R5,R5,R3
+
+                ADD       R0,R0,#+4
+
+                SUBS     R2,R2,#0x1
+
+                BNE        Loop
+
+L1:
+
+                STR         R1,RESULT
+
+                ALIGN
+
+                STR         R4,RESULT
+
+                ALIGN
+
+                STR         R5,RESULT
+
+                ALIGN
+
+                SW1       &11
+
+                AREA     Data1,DATA
+
+Table     DCW      &0012
+
+                ALLIGN
+
+                DCW      &0010
+
+                ALLIGN
+
+                DCW      &0015
+
+                ALLIGN
+
+                DCW      &0013
+
+                ALLIGN
+
+                DCW      &0009
+
+                ALLIGN
+
+                DCW      &0008
+
+                ALLIGN
+
+                DCW      &0001
+
+                ALLIGN
+
+                DCW      &0002
+
+                ALLIGN
+
+                DCW      &0005
+
+                ALLIGN
+
+                DCW      &0006
+
+                ALLIGN
+
+TablEND DCD    0
+
+AREA     Data2,DATA
+
+Length DCW      (TablEND-Table)/4
+
+                ALIGN
+
+Result   DCW      0
+
+                END
