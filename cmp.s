@@ -43,7 +43,7 @@ _part:
 
     POP {PC}
     
- _printF:
+ _printf:
     PUSH {LR}
     MOV R3, R2
     MOV R2, R1
@@ -62,6 +62,7 @@ _scanf:
     BL scanf                @ call scanf
     LDR R0, [SP]            @ load value at SP into R0
     ADD SP, SP, #4          @ restore the stack pointer
+    POP {R1}
     POP {PC}                 @ return
   
   
